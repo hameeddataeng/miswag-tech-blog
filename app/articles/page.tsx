@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Search, SlidersHorizontal } from "lucide-react"
+import { withBasePath } from "@/lib/utils"
 
 export default function ArticlesPage() {
   const [articles, setArticles] = useState<Article[]>([])
@@ -23,9 +24,9 @@ export default function ArticlesPage() {
     async function fetchData() {
       try {
         const [articlesRes, categoriesRes, teamRes] = await Promise.all([
-          fetch("/content/articles.json"),
-          fetch("/content/categories.json"),
-          fetch("/content/team.json"),
+          fetch(withBasePath("/content/articles.json")),
+          fetch(withBasePath("/content/categories.json")),
+          fetch(withBasePath("/content/team.json")),
         ])
 
         const [articlesData, categoriesData, teamData] = await Promise.all([

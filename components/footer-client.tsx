@@ -21,7 +21,7 @@ export function FooterClient() {
   })
 
   useEffect(() => {
-    fetch("/content/footer.json")
+    fetch(withBasePath("/content/footer.json"))
       .then((res) => res.json())
       .then((data) => setFooterContent(data))
       .catch((error) => console.error("Failed to load footer:", error))
