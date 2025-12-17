@@ -1,0 +1,35 @@
+[
+  {
+    "article_id": "modern-data-pipelines",
+    "article_title": "Building Modern Data Pipelines with Apache Kafka",
+    "author_team_id": 1,
+    "category_id": 1,
+    "article_created_at": "2025-01-15",
+    "article_keywords": ["kafka", "data engineering", "streaming"],
+    "article_description": "Learn how to build scalable and reliable data pipelines using Apache Kafka for real-time data processing.",
+    "article_directory": "modern-data-pipelines",
+    "featured_image": "kafka-pipeline.jpg"
+  },
+  {
+    "article_id": "microservices-best-practices",
+    "article_title": "Microservices Architecture: Best Practices and Patterns",
+    "author_team_id": 2,
+    "category_id": 2,
+    "article_created_at": "2025-01-10",
+    "article_keywords": ["microservices", "architecture", "backend"],
+    "article_description": "Explore the best practices for designing and implementing microservices architecture in modern applications.",
+    "article_directory": "microservices-best-practices",
+    "featured_image": "microservices.jpg"
+  },
+  {
+    "article_id": "cloud-native-apps",
+    "article_title": "Designing Cloud-Native Applications",
+    "author_team_id": 1,
+    "category_id": 3,
+    "article_created_at": "2025-01-05",
+    "article_keywords": ["cloud", "kubernetes", "containers"],
+    "article_description": "A comprehensive guide to designing applications that take full advantage of cloud computing.",
+    "article_directory": "cloud-native-apps",
+    "featured_image": "cloud-native.jpg"
+  }
+]

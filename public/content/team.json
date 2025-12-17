@@ -1,0 +1,18 @@
+[
+  {
+    "team_id": 1,
+    "team_member_name": "Hameed Mahmood Salih",
+    "team_member_position": "Data Engineer",
+    "team_member_linkedin": "https://www.linkedin.com/in/h-m-reseng/",
+    "team_member_avatar": "member1.png",
+    "team_member_bio": "Passionate about building scalable data pipelines and analytics solutions."
+  },
+  {
+    "team_id": 2,
+    "team_member_name": "Sarah Johnson",
+    "team_member_position": "Backend Developer",
+    "team_member_linkedin": "https://www.linkedin.com/in/sarahjohnson/",
+    "team_member_avatar": "member2.png",
+    "team_member_bio": "Specialized in building robust APIs and microservices architecture."
+  }
+]
