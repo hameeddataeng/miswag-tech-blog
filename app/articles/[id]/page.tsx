@@ -9,6 +9,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft } from "lucide-react"
+import { withBasePath } from "@/lib/utils"
 
 interface ArticlePageProps {
   params: Promise<{
@@ -92,7 +93,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               <div className="container mx-auto max-w-4xl px-4 py-8">
                 <div className="relative aspect-video w-full overflow-hidden rounded-lg">
                   <Image
-                    src={`/data/${article.article_directory}/${article.featured_image}`}
+                    src={withBasePath(`/data/${article.article_directory}/${article.featured_image}`)}
                     alt={article.article_title}
                     fill
                     className="object-cover"
@@ -132,7 +133,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 <div className="flex items-center gap-4 rounded-lg border border-border bg-card p-6">
                   <div className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-full bg-muted">
                     <Image
-                      src={`/avatars/${author.team_member_avatar}`}
+                      src={withBasePath(`/avatars/${author.team_member_avatar}`)}
                       alt={author.team_member_name}
                       fill
                       className="object-cover"

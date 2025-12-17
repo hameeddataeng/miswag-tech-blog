@@ -2,6 +2,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { withBasePath } from "@/lib/utils"
 
 interface ArticleCardProps {
   article: {
@@ -72,7 +73,7 @@ export function ArticleCard({ article, author, category }: ArticleCardProps) {
         {/* Image */}
         <div className="relative h-48 w-full overflow-hidden">
           <Image
-            src={`/data/${article.article_directory}/${article.featured_image}`}
+            src={withBasePath(`/data/${article.article_directory}/${article.featured_image}`)}
             alt={article.article_title}
             fill
             className="object-cover transition-transform group-hover:scale-105"

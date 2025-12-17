@@ -4,6 +4,7 @@ import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism"
+import { withBasePath } from "@/lib/utils"
 
 interface MarkdownRendererProps {
   content: string
@@ -63,8 +64,19 @@ export function MarkdownRenderer({ content, articleDirectory }: MarkdownRenderer
         },
         img: ({ src, alt }) => {
           const srcString = typeof src === 'string' ? src : ''
-          const imageSrc = articleDirectory && srcString && !srcString.startsWith("http") ? `/data/${articleDirectory}/${srcString}` : srcString
-          return <img src={imageSrc || "/placeholder.svg"} alt={alt || ""} className="my-6 rounded-lg" />
+          let imageSrc = srcString
+
+          // If it's a relative path and we have an article directory, prepend the article path
+          if (articleDirectory && srcString && !srcString.startsWith("http")) {
+            imageSrc = `/data/${articleDirectory}/${srcString}`
+          }
+
+          // Add basePath to all non-external images
+          if (imageSrc && !imageSrc.startsWith("http")) {
+            imageSrc = withBasePath(imageSrc)
+          }
+
+          return <img src={imageSrc || withBasePath("/placeholder.svg")} alt={alt || ""} className="my-6 rounded-lg" />
         },
       }}
       >

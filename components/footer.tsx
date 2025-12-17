@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { getFooterContent } from "@/lib/data"
+import { withBasePath } from "@/lib/utils"
 
 export async function Footer() {
   const footerContent = await getFooterContent()
@@ -9,7 +10,7 @@ export async function Footer() {
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-col items-center justify-between space-y-4 md:flex-row md:space-y-0">
           <div className="flex items-center space-x-2">
-            <Image src="/favicon.png" alt="Miswag" width={32} height={32} className="h-8 w-8" />
+            <Image src={withBasePath("/favicon.png")} alt="Miswag" width={32} height={32} className="h-8 w-8" />
             <span className="text-sm text-muted-foreground">{footerContent.copyright}</span>
           </div>
 

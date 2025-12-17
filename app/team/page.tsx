@@ -5,6 +5,7 @@ import Image from "next/image"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Linkedin } from "lucide-react"
+import { withBasePath } from "@/lib/utils"
 
 export default async function TeamPage() {
   const [teamMembers, articles] = await Promise.all([getTeamMembers(), getArticles()])
@@ -34,7 +35,7 @@ export default async function TeamPage() {
                       <div className="mb-4 flex justify-center">
                         <div className="relative h-32 w-32 overflow-hidden rounded-full bg-muted ring-4 ring-background transition-all group-hover:ring-primary">
                           <Image
-                            src={`/avatars/${member.team_member_avatar}`}
+                            src={withBasePath(`/avatars/${member.team_member_avatar}`)}
                             alt={member.team_member_name}
                             fill
                             className="object-cover"
