@@ -26,18 +26,27 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-      
+          cache: 'npm'
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
         with:
           static_site_generator: next
-      
+
       - name: Install dependencies
-        run: npm ci
-      
+        run: npm ci --legacy-peer-deps
+
       - name: Build with Next.js
         run: npm run build
-      
+
+      - name: Add .nojekyll file
+        run: touch ./out/.nojekyll
+
+      - name: Verify out directory
+        run: |
+          echo "Checking out directory..."
+          ls -la ./out
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
