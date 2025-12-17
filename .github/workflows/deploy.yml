@@ -21,31 +21,39 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
-      - name: Setup Node
+
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: 'npm'
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-        with:
-          static_site_generator: next
-
       - name: Install dependencies
-        run: npm ci --legacy-peer-deps
-
-      - name: Build with Next.js
-        run: npm run build
-
-      - name: Add .nojekyll file
-        run: touch ./out/.nojekyll
-
-      - name: Verify out directory
         run: |
-          echo "Checking out directory..."
-          ls -la ./out
+          npm ci --prefer-offline --no-audit --legacy-peer-deps || npm install --legacy-peer-deps
+
+      - name: Build Next.js site
+        run: |
+          npm run build
+        env:
+          NODE_ENV: production
+
+      - name: List build output
+        run: |
+          echo "=== Listing root directory ==="
+          ls -la
+          echo "=== Checking if out directory exists ==="
+          if [ -d "./out" ]; then
+            echo "✓ out directory exists"
+            ls -la ./out
+          else
+            echo "✗ out directory does not exist"
+            echo "Build may have failed"
+            exit 1
+          fi
+
+      - name: Add .nojekyll
+        run: touch ./out/.nojekyll
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
