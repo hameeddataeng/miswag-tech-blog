@@ -12,10 +12,10 @@ interface MarkdownRendererProps {
 
 export function MarkdownRenderer({ content, articleDirectory }: MarkdownRendererProps) {
   return (
-    <ReactMarkdown
-      remarkPlugins={[remarkGfm]}
-      className="prose prose-lg max-w-none"
-      components={{
+    <div className="prose prose-lg max-w-none">
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
+        components={{
         h1: ({ children }) => <h1 className="mb-6 mt-8 text-4xl font-bold text-balance">{children}</h1>,
         h2: ({ children }) => <h2 className="mb-4 mt-8 text-3xl font-semibold text-balance">{children}</h2>,
         h3: ({ children }) => <h3 className="mb-3 mt-6 text-2xl font-semibold">{children}</h3>,
@@ -38,25 +38,38 @@ export function MarkdownRenderer({ content, articleDirectory }: MarkdownRenderer
             {children}
           </blockquote>
         ),
-        code({ node, inline, className, children, ...props }) {
+        code({ className, children, ...props }) {
           const match = /language-(\w+)/.exec(className || "")
-          return !inline && match ? (
-            <SyntaxHighlighter style={oneDark} language={match[1]} PreTag="div" className="my-4 rounded-lg" {...props}>
+          const isInline = !match
+
+          if (isInline) {
+            return (
+              <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-sm" {...props}>
+                {children}
+              </code>
+            )
+          }
+
+          return (
+            <SyntaxHighlighter
+              style={oneDark as any}
+              language={match[1]}
+              PreTag="div"
+              className="my-4 rounded-lg"
+            >
               {String(children).replace(/\n$/, "")}
             </SyntaxHighlighter>
-          ) : (
-            <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-sm" {...props}>
-              {children}
-            </code>
           )
         },
         img: ({ src, alt }) => {
-          const imageSrc = articleDirectory && src && !src.startsWith("http") ? `/data/${articleDirectory}/${src}` : src
+          const srcString = typeof src === 'string' ? src : ''
+          const imageSrc = articleDirectory && srcString && !srcString.startsWith("http") ? `/data/${articleDirectory}/${srcString}` : srcString
           return <img src={imageSrc || "/placeholder.svg"} alt={alt || ""} className="my-6 rounded-lg" />
         },
       }}
-    >
-      {content}
-    </ReactMarkdown>
+      >
+        {content}
+      </ReactMarkdown>
+    </div>
   )
 }

@@ -45,17 +45,84 @@ npm run build
 
 ## Adding Content
 
-### Adding Articles
+### Adding a New Article
 
-1. Create a new folder in `public/data/{article-slug}/`
-2. Add `index.md` with your article content
-3. Add article metadata to `public/content/articles.json`
-4. Add any images to the article folder
+1. **Create article directory:**
+   ```bash
+   mkdir public/data/my-new-article
+   ```
 
-### Adding Team Members
+2. **Create the markdown file:**
+   Create `public/data/my-new-article/index.md` with your content:
+   ```markdown
+   # My Article Title
 
-1. Add member info to `public/content/team.json`
-2. Add avatar image to `public/avatars/`
+   Your article content here with markdown formatting.
+
+   ## Section heading
+
+   - Bullet points
+   - Code blocks
+   - Images
+
+   ```python
+   # Code example
+   print("Hello World")
+   ```
+   ```
+
+3. **Add images (optional):**
+   Place any images in the same folder:
+   ```bash
+   public/data/my-new-article/image1.png
+   ```
+
+4. **Add metadata to `public/content/articles.json`:**
+   ```json
+   {
+     "article_id": "my-new-article",
+     "article_title": "My Article Title",
+     "author_team_id": 1,
+     "category_id": 1,
+     "article_created_at": "2025-12-17",
+     "article_keywords": ["keyword1", "keyword2"],
+     "article_description": "Brief description of the article",
+     "article_directory": "my-new-article",
+     "featured_image": "image1.png"
+   }
+   ```
+
+### Adding a New Team Member
+
+1. **Add avatar image:**
+   ```bash
+   # Add image to public/avatars/
+   public/avatars/newmember.png
+   ```
+
+2. **Add member info to `public/content/team.json`:**
+   ```json
+   {
+     "team_id": 3,
+     "team_member_name": "New Member Name",
+     "team_member_position": "Position Title",
+     "team_member_linkedin": "https://www.linkedin.com/in/username/",
+     "team_member_avatar": "newmember.png",
+     "team_member_bio": "Short bio about the team member"
+   }
+   ```
+
+### Adding a New Category
+
+Add a new category to `public/content/categories.json`:
+```json
+{
+  "category_id": 5,
+  "category_name": "New Category Name"
+}
+```
+
+Then you can reference this category when creating articles using `"category_id": 5`.
 
 ## Deployment
 

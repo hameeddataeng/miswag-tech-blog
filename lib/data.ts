@@ -1,3 +1,6 @@
+import fs from "fs/promises"
+import path from "path"
+
 export interface SiteConfig {
   title: string
   bio: string
@@ -29,34 +32,34 @@ export interface Article {
   featured_image: string
 }
 
+const publicDir = path.join(process.cwd(), "public")
+
 export async function getSiteConfig(): Promise<SiteConfig> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || ""}/content/site.json`)
-  if (!res.ok) throw new Error("Failed to fetch site config")
-  return res.json()
+  const filePath = path.join(publicDir, "content", "site.json")
+  const fileContent = await fs.readFile(filePath, "utf-8")
+  return JSON.parse(fileContent)
 }
 
 export async function getCategories(): Promise<Category[]> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || ""}/content/categories.json`)
-  if (!res.ok) throw new Error("Failed to fetch categories")
-  return res.json()
+  const filePath = path.join(publicDir, "content", "categories.json")
+  const fileContent = await fs.readFile(filePath, "utf-8")
+  return JSON.parse(fileContent)
 }
 
 export async function getTeamMembers(): Promise<TeamMember[]> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || ""}/content/team.json`)
-  if (!res.ok) throw new Error("Failed to fetch team members")
-  return res.json()
+  const filePath = path.join(publicDir, "content", "team.json")
+  const fileContent = await fs.readFile(filePath, "utf-8")
+  return JSON.parse(fileContent)
 }
 
 export async function getArticles(): Promise<Article[]> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || ""}/content/articles.json`, {
-    cache: "no-store",
-  })
-  if (!res.ok) throw new Error("Failed to fetch articles")
-  return res.json()
+  const filePath = path.join(publicDir, "content", "articles.json")
+  const fileContent = await fs.readFile(filePath, "utf-8")
+  return JSON.parse(fileContent)
 }
 
 export async function getArticleContent(directory: string): Promise<string> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || ""}/data/${directory}/index.md`)
-  if (!res.ok) throw new Error("Failed to fetch article content")
-  return res.text()
+  const filePath = path.join(publicDir, "data", directory, "index.md")
+  const fileContent = await fs.readFile(filePath, "utf-8")
+  return fileContent
 }

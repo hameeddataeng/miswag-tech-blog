@@ -5,7 +5,7 @@
   },
   {
     "category_id": 2,
-    "category_name": "Backend Software Development"
+    "category_name": "Software Development"
   },
   {
     "category_id": 3,
@@ -14,5 +14,9 @@
   {
     "category_id": 4,
     "category_name": "Machine Learning"
+  },
+  {
+    "category_id": 5,
+    "category_name": "Product Design"
   }
 ]
